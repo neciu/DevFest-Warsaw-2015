@@ -1,52 +1,93 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
+import React from 'react-native';
+import {
+    AppRegistry,
+    Component,
+    StyleSheet,
+    DrawerLayoutAndroid,
+    View,
+    Text,
+    TouchableNativeFeedback,
+} from 'react-native';
+import MainView from './main-view.android';
+import Animations from './animations.android';
 
-var React = require('react-native');
-var {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-} = React;
+class DevFestWarsaw2015 extends Component {
+    constructor() {
+        super();
 
-var DevFestWarsaw2015 = React.createClass({
-  render: function() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-});
+        this.state = {
+            mainViewSelected: true,
+            animationsSelected: false,
+            panResponderSelected: false,
+        }
+    }
 
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    render() {
+        return (
+            <DrawerLayoutAndroid ref="drawer" renderNavigationView={this._renderNavigationView.bind(this)}>
+                {this.state.mainViewSelected && <MainView onNavigationIconClicked={this._showDrawer.bind(this)}/>}
+                {this.state.animationsSelected && <Animations onNavigationIconClicked={this._showDrawer.bind(this)}/>}
+            </DrawerLayoutAndroid>
+        );
+    }
+
+    _renderNavigationView() {
+        return (
+            <View style={{flex: 1, backgroundColor: '#fff'}}>
+                <TouchableNativeFeedback onPress={this._selectMain.bind(this)}>
+                    <View style={styles.drawerButton}>
+                        <Text>
+                            Buttons And TextInput
+                        </Text>
+                    </View>
+                </TouchableNativeFeedback>
+                <TouchableNativeFeedback onPress={this._selectAnimations.bind(this)}>
+                    <View style={styles.drawerButton}>
+                        <Text>
+                            Animations
+                        </Text>
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+        );
+    }
+
+    _showDrawer() {
+        this.refs.drawer.openDrawer();
+    }
+
+    _selectMain() {
+        this.setState({
+            mainViewSelected: true,
+            animationsSelected: false,
+            panResponderSelected: false,
+        });
+        this.refs.drawer.closeDrawer();
+    }
+
+    _selectAnimations() {
+        this.setState({
+            mainViewSelected: false,
+            animationsSelected: true,
+            panResponderSelected: false,
+        });
+        this.refs.drawer.closeDrawer();
+    }
+
+    _selectPanResponder() {
+        this.setState({
+            mainViewSelected: false,
+            animationsSelected: false,
+            panResponderSelected: true,
+        });
+        this.refs.drawer.closeDrawer();
+    }
+}
+
+const styles = StyleSheet.create({
+    drawerButton: {
+        padding: 16
+    }
 });
 
 AppRegistry.registerComponent('DevFestWarsaw2015', () => DevFestWarsaw2015);
