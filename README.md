@@ -1,4 +1,4 @@
-![Example recording](http://zippy.gfycat.com/IdenticalSorrowfulDiscus.gif)
+![Example recording](http://fat.gfycat.com/IdenticalSorrowfulDiscus.gif)
 
 (Full version of animation [here](http://gfycat.com/IdenticalSorrowfulDiscus))
 
