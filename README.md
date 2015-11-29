@@ -1,3 +1,7 @@
+![Example recording](http://zippy.gfycat.com/IdenticalSorrowfulDiscus.gif)
+
+(Full version of animation [here](http://gfycat.com/IdenticalSorrowfulDiscus))
+
 # How To Run
 
 1. Install `node` with `npm`.
